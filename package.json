@@ -1,0 +1,29 @@
+{
+  "name": "mqtt-osem-integration",
+  "version": "0.0.0",
+  "description": "openSenseMap MQTT client",
+  "main": "src/index.js",
+  "repository": "https://github.com/sensebox/mqtt-osem-integration.git",
+  "author": "Gerald Pape <ubergesundheit@googlemail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "node_modules/.bin/eslint --fix \"{src,test,.scripts}/**/*.js\"",
+    "test": "node_modules/.bin/mocha",
+    "arduino-test": "node arduino-test/build-sketches.js",
+    "version": "node .scripts/npm_version-update_changelog.js && git add CHANGELOG.md"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "eslint": "^4.3.0",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "mocha": "^3.4.2",
+    "prettier": "^1.5.3"
+  },
+  "dependencies": {
+    "@sensebox/opensensemap-api-models": "0.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

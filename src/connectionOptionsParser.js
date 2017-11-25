@@ -13,7 +13,7 @@ const ALLOWED_KEYS = [
 
 module.exports = {
   // userConnectionOptions is a string which contains json
-  parse (userConnectionOptions) {
+  parse(userConnectionOptions) {
     const opts = {};
 
     if (userConnectionOptions) {
@@ -27,7 +27,7 @@ module.exports = {
 
       if (userOptions) {
         // just handle keys in the ALLOWED_KEYS array
-        ALLOWED_KEYS.forEach(function (key) {
+        ALLOWED_KEYS.forEach(function(key) {
           if (userOptions[key]) {
             opts[key] = userOptions[key];
           }
@@ -38,7 +38,8 @@ module.exports = {
     // check if there was a user supplied clientId
     // and if not generate one..
     if (!opts.clientId || typeof opts.clientId !== 'string') {
-      opts.clientId = `osem_${Math.random().toString(16)
+      opts.clientId = `osem_${Math.random()
+        .toString(16)
         .substr(2, 8)}`;
     }
 
