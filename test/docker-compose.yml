@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:1.4.12
+    ports:
+      - "1884:1883"
+  db:
+    image: mongo:3.2
+    ports:
+      - "27018:27017"
