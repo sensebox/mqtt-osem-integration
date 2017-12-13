@@ -4,12 +4,13 @@ const log = require('./logger'),
   { decoding, Box } = require('@sensebox/opensensemap-api-models');
 
 // see https://github.com/mqttjs/MQTT.js#client
-const ALLOWED_KEYS = [
+const USER_CONNECT_OPTIONS_ALLOWED_KEYS = [
   'keepalive',
   'reschedulePings',
   'clientId',
   'username',
-  'password'
+  'password',
+  'connectTimeout'
 ];
 
 // userConnectionOptions is a string which contains json
@@ -23,11 +24,11 @@ const parseUserConnectionOptions = function parseUserConnectionOptions(
 
     if (userOptions) {
       // just handle keys in the ALLOWED_KEYS array
-      ALLOWED_KEYS.forEach(function(key) {
+      for (const key of USER_CONNECT_OPTIONS_ALLOWED_KEYS) {
         if (userOptions[key]) {
           opts[key] = userOptions[key];
         }
-      });
+      }
     }
   }
 
@@ -41,7 +42,7 @@ const parseUserConnectionOptions = function parseUserConnectionOptions(
 
   // check if there was a user supplied connectTimeout
   // and if not set to 5 seconds
-  if (!opts.connectTimeout || typeof opts.connectTimeout !== 'string') {
+  if (!opts.connectTimeout || isNaN(Number(opts.connectTimeout))) {
     opts.connectTimeout = 5 * 1000;
   }
 
@@ -89,11 +90,13 @@ module.exports = function parseConfig(box) {
   }
 
   // validate decodeOptions
-  try {
-    decodeOptions = JSON.parse(decodeOptions);
-  } catch (err) {
-    log.warn(`mqtt decode options of box ${box._id} not parseable: ${err}`);
-    decodeOptions = undefined;
+  if (decodeOptions) {
+    try {
+      decodeOptions = JSON.parse(decodeOptions);
+    } catch (err) {
+      log.warn(`mqtt decode options of box ${box._id} not parseable: ${err}`);
+      decodeOptions = undefined;
+    }
   }
 
   // try to find a handler
