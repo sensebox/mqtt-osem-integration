@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message RefreshRequest {
+  required string box_id = 1;
+}
+
+message RefreshResponse {
+  uint32 result = 1;
+}
+
+service BoxRefresher {
+  rpc RefreshBox (RefreshRequest) returns (RefreshResponse);
+}

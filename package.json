@@ -25,6 +25,7 @@
   "dependencies": {
     "@sensebox/opensensemap-api-models": "0.0.3",
     "bunyan": "^1.8.12",
+    "grpc": "^1.7.3",
     "mqtt": "^2.14.0"
   },
   "publishConfig": {
