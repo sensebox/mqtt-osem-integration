@@ -1,0 +1,16 @@
+# Create CA:
+```
+certstrap init --common-name "openSenseMapCA"
+```
+
+# Create certificate requests for the server and client
+```
+certstrap request-cert --key out/openSenseMapCA.key --common-name "mqtt-integration server" --domain mqtt-integration,localhost
+certstrap request-cert --key out/openSenseMapCA.key --common-name "mqtt-integration client" --domain api,localhost
+```
+
+# Sign the certificate requests
+```
+certstrap sign --CA "openSenseMapCA" mqtt-integration_server
+certstrap sign --CA "openSenseMapCA" mqtt-integration_client
+```
