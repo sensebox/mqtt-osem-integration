@@ -69,6 +69,10 @@ const connect = async function connect(box) {
     log.error(err);
   }
 
+  if (!mqttCfg.enabled) {
+    return;
+  }
+
   try {
     const client = await getClient(
       mqttCfg.internalConnectionOptions,

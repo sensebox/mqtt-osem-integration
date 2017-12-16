@@ -62,6 +62,10 @@ module.exports = function parseConfig(box) {
     throw new Error(`No mqtt configuration found for box ${box._id}`);
   }
 
+  if (!box.integrations.mqtt.enabled) {
+    return { enabled: false };
+  }
+
   for (const prop of ['url', 'topic', 'messageFormat']) {
     if (!box.integrations.mqtt[prop]) {
       throw new Error(
@@ -76,7 +80,8 @@ module.exports = function parseConfig(box) {
     topic,
     messageFormat,
     connectionOptions,
-    decodeOptions
+    decodeOptions,
+    enabled
   } = box.integrations.mqtt;
   /* eslint-enable prefer-const */
 
@@ -108,6 +113,7 @@ module.exports = function parseConfig(box) {
   }
 
   return {
+    enabled,
     _id: box._id,
     internalConnectionOptions: {
       url,
