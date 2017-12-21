@@ -1,0 +1,14 @@
+{
+  "mqtt_client": {
+    "num_retries": 5,
+    "retry_after_minutes": 10
+  },
+  "grpc": {
+    "port": 3925,
+    "certificates": {
+      "ca_cert": "",
+      "server_cert": "",
+      "server_key": ""
+    }
+  }
+}

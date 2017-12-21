@@ -1,0 +1,14 @@
+{
+  "mqtt_client": {
+    "num_retries": "OSEM_MQTT_NUM_RETRIES",
+    "retry_after_minutes": "OSEM_MQTT_RETRY_AFTER_MINUTES"
+  },
+  "grpc": {
+    "port": "OSEM_MQTT_GRPC_PORT",
+    "certificates": {
+      "ca_cert": "OSEM_MQTT_GRPC_CA_CERT",
+      "server_cert": "OSEM_MQTT_GRPC_SERVER_CERT",
+      "server_key": "OSEM_MQTT_GRPC_SERVER_KEY"
+    }
+  }
+}
