@@ -1,6 +1,9 @@
 'use strict';
 
-const { db: { connect }, Box } = require('@sensebox/opensensemap-api-models'),
+const {
+    db: { connect, mongoose },
+    Box
+  } = require('@sensebox/opensensemap-api-models'),
   log = require('./logger.js'),
   MQTTClient = require('./client'),
   grpcServer = require('./grpc-server');
@@ -28,7 +31,14 @@ const onDbConnected = async function onDbConnected() {
   }
 
   // start the grpc server
-  grpcServer.init();
+  try {
+    grpcServer.init();
+  } catch (err) {
+    log.fatal(err);
+    mongoose.disconnect().then(function() {
+      process.exit(1);
+    });
+  }
 };
 
 // connect to the database

@@ -7,11 +7,11 @@
   "author": "Gerald Pape <ubergesundheit@googlemail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "node src/index.js",
     "lint": "eslint --fix \"{src,test,.scripts}/**/*.js\"",
     "pretest": "docker-compose -f test/docker-compose.yml up -d",
     "test": "mocha test/index.js",
     "posttest": "docker-compose -f test/docker-compose.yml down -v",
-    "arduino-test": "node arduino-test/build-sketches.js",
     "version": "node .scripts/npm_version-update_changelog.js && git add CHANGELOG.md"
   },
   "devDependencies": {
