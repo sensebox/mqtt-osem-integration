@@ -2,3 +2,4 @@ node_modules
 .vscode
 config/development.json
 out
+yarn-error.log

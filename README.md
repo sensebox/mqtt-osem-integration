@@ -8,7 +8,7 @@ MQTT client service for [openSenseMap API]. Connects to remote MQTT brokers and 
 The database connection can be configured throgh the environment variable `OSEM_dbconnectionstring`. Should be a valid [mongoDB Connection String].
 
 #### Everything else
-The remainder of the integration can be configured either through overriding the values in [config/default.json]
+The remainder of the integration can be configured either through overriding the values in [config/default.json](config/default.json)
 
 Configuration is handled by [node-config].
 
