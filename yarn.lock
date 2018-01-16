@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@sensebox/opensensemap-api-models@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.3.tgz#0f7ca0964661225c95bcfc46920502ec41fc818f"
+"@sensebox/opensensemap-api-models@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.4.tgz#af5f21d2ecd7a02655bffe4511020f0d1ad0ca2a"
   dependencies:
     "@sensebox/sketch-templater" "^1.0.7"
     "@turf/helpers" "^4.6.0"
