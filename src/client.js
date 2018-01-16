@@ -3,12 +3,10 @@
 const mqtt = require('mqtt'),
   parseMQTTConfig = require('./mqttConfigParser'),
   log = require('./logger'),
-  config = require('config');
+  config = require('config').get('mqtt_client');
 
-const RETRY_AFTER_MINUTES = Number(
-    config.get('mqtt_client.retry_after_minutes')
-  ),
-  NUMBER_RETRIES = Number(config.get('mqtt_client.num_retries'));
+const RETRY_AFTER_MINUTES = Number(config.get('retry_after_minutes')),
+  NUMBER_RETRIES = Number(config.get('num_retries'));
 
 // use this object as simple key/value store for connecting/disconnecting
 const mqttConnections = {};

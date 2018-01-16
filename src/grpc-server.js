@@ -5,7 +5,7 @@ const grpc = require('grpc'),
   MQTTClient = require('./client'),
   fs = require('fs'),
   log = require('./logger'),
-  config = require('config'),
+  config = require('config').get('grpc'),
   { mqttProto } = require('@sensebox/osem-protos');
 
 const { MqttBoxRefresher } = grpc.load(mqttProto);
@@ -33,7 +33,7 @@ const refreshBox = async function refreshBox(call, callback) {
 
 const prepareCredentials = function prepareCredentials() {
   const certs = ['ca_cert', 'server_cert', 'server_key'].map(key => {
-    const config_key = config.get(`grpc.certificates.${key}`);
+    const config_key = config.get(`certificates.${key}`);
 
     // Check if the value is the certificate or key itself
     if (config_key.startsWith('-----BEGIN')) {
@@ -57,7 +57,7 @@ const prepareCredentials = function prepareCredentials() {
 };
 
 const init = function init() {
-  const port = Number(config.get('grpc.port'));
+  const port = Number(config.get('port'));
   log.info(`Starting GRPC server on port ${port}`);
 
   const credentials = prepareCredentials();
