@@ -23,7 +23,7 @@
     "prettier": "^1.5.3"
   },
   "dependencies": {
-    "@sensebox/opensensemap-api-models": "0.0.4",
+    "@sensebox/opensensemap-api-models": "0.0.5",
     "@sensebox/osem-protos": "1.0.0",
     "bunyan": "^1.8.12",
     "config": "^1.28.1",
