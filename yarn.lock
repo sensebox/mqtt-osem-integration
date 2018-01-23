@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@sensebox/eslint-config-sensebox@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@sensebox/eslint-config-sensebox/-/eslint-config-sensebox-0.0.1.tgz#c137b7443cf3e36505b7d368882b2699c601ca1f"
+
 "@sensebox/opensensemap-api-models@0.0.5":
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.5.tgz#b7eaca6240286d17622675dda610476a64f88588"
