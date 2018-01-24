@@ -8,9 +8,9 @@ const expect = require('chai').expect,
   mqttClient = require('../src/client'),
   mqtt = require('mqtt');
 
-describe('mqtt client', function() {
+describe('mqtt client', function () {
   let testBox;
-  before(async function() {
+  before(async function () {
     await connect(dbConnectionString({ db: 'mqttTest' }));
 
     testBox = await Box.initNew(senseBox());
@@ -33,7 +33,7 @@ describe('mqtt client', function() {
     });
   });
 
-  it('should accept measurements via mqtt message', async function() {
+  it('should accept measurements via mqtt message', async function () {
     const box = await Box.findBoxById(testBox._id, {
       onlyLastMeasurements: true
     });

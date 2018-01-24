@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function senseBox(
+module.exports = function senseBox (
   // parameter destructuring
   { enabled, url, topic, connectionOptions, decodeOptions, messageFormat } = {
     // defaults

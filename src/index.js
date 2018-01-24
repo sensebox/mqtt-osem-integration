@@ -8,7 +8,7 @@ const {
   MQTTClient = require('./client'),
   grpcServer = require('./grpc-server');
 
-const findMQTTBoxes = function findMQTTBoxes() {
+const findMQTTBoxes = function findMQTTBoxes () {
   return Box.find(
     { 'integrations.mqtt.enabled': true },
     { 'integrations.mqtt': 1 },
@@ -17,7 +17,7 @@ const findMQTTBoxes = function findMQTTBoxes() {
 };
 
 // executed after the connection to the database has been established
-const onDbConnected = async function onDbConnected() {
+const onDbConnected = async function onDbConnected () {
   // try to connect boxes with mqtt configuration upon first start
   let mqttBoxes;
   try {
@@ -35,7 +35,7 @@ const onDbConnected = async function onDbConnected() {
     grpcServer.init();
   } catch (err) {
     log.fatal(err);
-    mongoose.disconnect().then(function() {
+    mongoose.disconnect().then(function () {
       process.exit(1);
     });
   }
@@ -44,6 +44,6 @@ const onDbConnected = async function onDbConnected() {
 // connect to the database
 connect()
   .then(onDbConnected)
-  .catch(function onDbError(err) {
+  .catch(function onDbError (err) {
     log.fatal({ err });
   });

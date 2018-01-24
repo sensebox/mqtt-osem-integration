@@ -2,7 +2,7 @@
 
 /* global describe */
 
-describe('mqtt-osem-integration', function() {
+describe('mqtt-osem-integration', function () {
   /* eslint-disable global-require */
   require('./test-mqttConfigParser');
   require('./test-mqtt');

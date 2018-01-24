@@ -11,13 +11,13 @@ const RETRY_AFTER_MINUTES = Number(config.get('retry_after_minutes')),
 // use this object as simple key/value store for connecting/disconnecting
 const mqttConnections = {};
 
-const _retryAfter = function _retryAfter(box, afterMinutes) {
+const _retryAfter = function _retryAfter (box, afterMinutes) {
   setTimeout(() => {
     connect(box);
   }, afterMinutes * 60000);
 };
 
-const getClient = function getClient(
+const getClient = function getClient (
   { url, connectionOptions, topic },
   maxRetries
 ) {
@@ -27,8 +27,8 @@ const getClient = function getClient(
   const client = mqtt.connect(url, connectionOptions);
   client.reconnecting = true;
 
-  return new Promise(function(resolve, reject) {
-    client.on('error', function(err) {
+  return new Promise(function (resolve, reject) {
+    client.on('error', function (err) {
       errRetries = errRetries - 1;
       if (errRetries === 0) {
         client.reconnecting = false;
@@ -38,18 +38,18 @@ const getClient = function getClient(
       }
     });
 
-    client.on('close', function() {
+    client.on('close', function () {
       closeRetries = closeRetries - 1;
       if (closeRetries === 0) {
         client.reconnecting = false;
         client.end(true);
 
-        return reject(new Error(`connection closed after 5 retries.`));
+        return reject(new Error('connection closed after 5 retries.'));
       }
     });
 
-    client.on('connect', function() {
-      client.subscribe(topic, function(err) {
+    client.on('connect', function () {
+      client.subscribe(topic, function (err) {
         if (err) {
           return reject(err);
         }
@@ -60,7 +60,7 @@ const getClient = function getClient(
   });
 };
 
-const connect = async function connect(box) {
+const connect = async function connect (box) {
   // disconnect any running connections before reconnecting..
   disconnect(box);
   let mqttCfg;
@@ -83,7 +83,7 @@ const connect = async function connect(box) {
 
     mqttConnections[box._id] = client;
 
-    client.on('close', function() {
+    client.on('close', function () {
       log.info(`mqtt closed for box: ${box._id}`);
     });
 
@@ -100,7 +100,7 @@ const connect = async function connect(box) {
   }
 };
 
-const disconnect = function disconnect({ _id }) {
+const disconnect = function disconnect ({ _id }) {
   if (mqttConnections[_id]) {
     mqttConnections[_id].end(true);
     mqttConnections[_id] = undefined;

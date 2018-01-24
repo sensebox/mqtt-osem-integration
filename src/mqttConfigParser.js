@@ -14,7 +14,7 @@ const USER_CONNECT_OPTIONS_ALLOWED_KEYS = [
 ];
 
 // userConnectionOptions is a string which contains json
-const parseUserConnectionOptions = function parseUserConnectionOptions(
+const parseUserConnectionOptions = function parseUserConnectionOptions (
   userConnectionOptions
 ) {
   const opts = {};
@@ -57,7 +57,7 @@ const parseUserConnectionOptions = function parseUserConnectionOptions(
  *          function along with the box id for the given input box
  * @throws Invalid configuration will make this function throw an Error
  */
-module.exports = function parseConfig(box) {
+module.exports = function parseConfig (box) {
   if (!box.integrations || !box.integrations.mqtt) {
     throw new Error(`No mqtt configuration found for box ${box._id}`);
   }
@@ -120,7 +120,7 @@ module.exports = function parseConfig(box) {
       topic,
       connectionOptions
     },
-    async decodeAndSaveMessage(topic, message) {
+    async decodeAndSaveMessage (topic, message) {
       // decode the measurements, query the database for the box,
       // then save the measurements
       try {

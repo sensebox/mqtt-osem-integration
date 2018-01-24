@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function createDbConnectionString({
+module.exports = function createDbConnectionString ({
   db = 'OSeM-api',
   host = 'localhost',
   port = 27018

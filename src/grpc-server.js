@@ -10,7 +10,7 @@ const grpc = require('grpc'),
 
 const { MqttBoxRefresher } = grpc.load(mqttProto);
 
-const refreshBox = async function refreshBox(call, callback) {
+const refreshBox = async function refreshBox (call, callback) {
   const { box_id } = call.request;
 
   try {
@@ -31,7 +31,7 @@ const refreshBox = async function refreshBox(call, callback) {
   }
 };
 
-const prepareCredentials = function prepareCredentials() {
+const prepareCredentials = function prepareCredentials () {
   const certs = ['ca_cert', 'server_cert', 'server_key'].map(key => {
     const config_key = config.get(`certificates.${key}`);
 
@@ -56,7 +56,7 @@ const prepareCredentials = function prepareCredentials() {
   );
 };
 
-const init = function init() {
+const init = function init () {
   const port = Number(config.get('port'));
   log.info(`Starting GRPC server on port ${port}`);
 
