@@ -1,0 +1,10 @@
+node_modules
+out
+config/development.json
+test
+.eslintrc*
+.travis.yml
+.gitignore
+.scripts
+.npmignore
+*.log
