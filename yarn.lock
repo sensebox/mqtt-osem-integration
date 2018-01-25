@@ -28,9 +28,9 @@
     stringify-stream "^1.0.5"
     uuid "^3.1.0"
 
-"@sensebox/osem-protos@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@sensebox/osem-protos/-/osem-protos-1.0.0.tgz#53c9f8a614202f1765274889277dd3b50594f0a7"
+"@sensebox/osem-protos@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@sensebox/osem-protos/-/osem-protos-1.1.0.tgz#a7de8bc6be867953f1309181a012063c23299e79"
 
 "@sensebox/sketch-templater@^1.1.1":
   version "1.1.1"

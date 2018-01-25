@@ -8,9 +8,9 @@ const grpc = require('grpc'),
   config = require('config').get('grpc'),
   { mqttProto } = require('@sensebox/osem-protos');
 
-const { MqttBoxRefresher } = grpc.load(mqttProto);
+const { MqttService } = grpc.load(mqttProto);
 
-const refreshBox = async function refreshBox (call, callback) {
+const connectBox = async function connectBox (call, callback) {
   const { box_id } = call.request;
 
   try {
@@ -31,13 +31,21 @@ const refreshBox = async function refreshBox (call, callback) {
   }
 };
 
+const disconnectBox = function disconnectBox (call, callback) {
+  const { box_id } = call.request;
+
+  MQTTClient.disconnect({ _id: box_id });
+
+  return callback(null, {});
+};
+
 const prepareCredentials = function prepareCredentials () {
   const certs = ['ca_cert', 'server_cert', 'server_key'].map(key => {
     const config_key = config.get(`certificates.${key}`);
 
     // Check if the value is the certificate or key itself
     if (config_key.startsWith('-----BEGIN')) {
-      return config_key;
+      return Buffer.from(config_key);
     }
 
     // Otherwise treat the value as input path and try to read the file
@@ -58,12 +66,12 @@ const prepareCredentials = function prepareCredentials () {
 
 const init = function init () {
   const port = Number(config.get('port'));
-  log.info(`Starting GRPC server on port ${port}`);
+  log.info(`Starting MQTT Integration GRPC server on port ${port}`);
 
   const credentials = prepareCredentials();
 
   const server = new grpc.Server();
-  server.addService(MqttBoxRefresher.service, { refreshBox });
+  server.addService(MqttService.service, { connectBox, disconnectBox });
   server.bind(`0.0.0.0:${port}`, credentials);
   server.start();
 };

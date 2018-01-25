@@ -5,9 +5,9 @@ const grpc = require('grpc'),
   path = require('path'),
   { mqttProto } = require('@sensebox/osem-protos');
 
-const { MqttBoxRefresher } = grpc.load(mqttProto);
+const { MqttService } = grpc.load(mqttProto);
 
-const readCertFile = function readCertFile(filename) {
+const readCertFile = function readCertFile (filename) {
   return fs.readFileSync(path.join(process.cwd(), 'out', filename));
 };
 
@@ -17,9 +17,9 @@ const ca = readCertFile('openSenseMap_CA.crt'),
 
 const credentials = grpc.credentials.createSsl(ca, client_key, client_crt);
 
-const client = new MqttBoxRefresher('localhost:3925', credentials);
+const client = new MqttService('localhost:3925', credentials);
 
-client.refreshBox({ box_id: '5a325467c1a5ac315ff70c89' }, function(
+client.connectBox({ box_id: '5a325467c1a5ac315ff70c89' }, function (
   err,
   response
 ) {
