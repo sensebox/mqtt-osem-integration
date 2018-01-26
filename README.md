@@ -4,13 +4,31 @@ MQTT client service for [openSenseMap API]. Connects to remote MQTT brokers and 
 
 ## Configuration
 
-#### Database connection
-The database connection can be configured throgh the environment variable `OSEM_dbconnectionstring`. Should be a valid [mongoDB Connection String].
-
-#### Everything else
-The remainder of the integration can be configured either through overriding the values in [config/default.json](config/default.json)
-
 Configuration is handled by [node-config].
+
+See [config/default.json](config/default.json). You should at least configure the connection to the database and the certificates for GRPC. Certificates can either configured directly as strings or can take a path to a file in pem format.
+
+    {
+      "grpc": {
+        "certificates": {
+          // example for path
+          "ca_cert": "/etc/ssl/certs/My_CA.pem",
+          // example for stringified certificate (sed -z 's/\n/\\n/g' < certificate.crt)
+          "server_cert": "-----BEGIN CERTIFICATE-----\nMIIE9DCCAtygAwIBA ... ",
+          "server_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIJKQIBAAKCAg ..."
+        }
+      },
+      "openSenseMap-API-models": {
+        "db": {
+          // See example config json of @sensebox/opensensemap-api-models
+          "mongo_uri"
+        }
+      }
+    }
+
+## Environment variables
+
+Its possible to supply your configuration json through the `NODE_CONFIG` environment variable. It is also possible to configure through custom environment variables:
 
 | Config key | Environment Variable | Description |
 |------------|----------------------|-------------|
@@ -21,7 +39,14 @@ Configuration is handled by [node-config].
 | `grpc.certificates.server_cert` | `OSEM_MQTT_GRPC_SERVER_CERT` | Server certificate for gRPC TLS client authentication. Can be specified either as path to a certificate file or the certificate directly. |
 | `grpc.certificates.server_key` | `OSEM_MQTT_GRPC_SERVER_KEY` | Server certificate key for gRPC TLS client authentication. Can be specified either as path to a key file or the key directly. |
 
+## Container images and Versions
+
+Container images for this service are created on each push on [Docker Hub].
+
+Stable versions should be tagged using `yarn version` and `git push --follow-tags origin master`
+
 [openSenseMap API]: https://github.com/sensebox/openSenseMap-API
 [node-config]: https://github.com/lorenwest/node-config
 [mongoDB Connection String]: https://docs.mongodb.com/v3.2/reference/connection-string/
 [osem-protos]: https://github.com/sensebox/osem-protos/blob/master/mqtt/mqtt.proto
+[Docker Hub]: https://hub.docker.com/r/sensebox/mqtt-osem-integration

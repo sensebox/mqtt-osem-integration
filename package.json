@@ -1,6 +1,6 @@
 {
   "name": "mqtt-osem-integration",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "openSenseMap MQTT client",
   "main": "src/index.js",
   "repository": "https://github.com/sensebox/mqtt-osem-integration.git",
@@ -11,8 +11,7 @@
     "lint": "eslint --fix \"{src,test,.scripts}/**/*.js\"",
     "pretest": "docker-compose -f test/docker-compose.yml up -d",
     "test": "mocha test/index.js",
-    "posttest": "docker-compose -f test/docker-compose.yml down -v",
-    "version": "node .scripts/npm_version-update_changelog.js && git add CHANGELOG.md"
+    "posttest": "docker-compose -f test/docker-compose.yml down -v"
   },
   "devDependencies": {
     "@sensebox/eslint-config-sensebox": "^1.0.0",
