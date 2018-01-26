@@ -8,3 +8,9 @@ test
 .scripts
 .npmignore
 *.log
+.git
+*.md
+.dockerignore
+Dockerfile
+certstrap-notes
+grpc-test-client.js
