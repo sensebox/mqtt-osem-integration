@@ -1,6 +1,6 @@
 {
   "name": "mqtt-osem-integration",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "openSenseMap MQTT client",
   "main": "src/index.js",
   "repository": "https://github.com/sensebox/mqtt-osem-integration.git",
