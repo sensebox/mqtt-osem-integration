@@ -35,8 +35,7 @@ const parseUserConnectionOptions = function parseUserConnectionOptions (
   // check if there was a user supplied clientId
   // and if not generate one..
   if (!opts.clientId || typeof opts.clientId !== 'string') {
-    opts.clientId = `osem_${Math.random()
-      .toString(16)
+    opts.clientId = `osem_${Math.random().toString(16)
       .substr(2, 8)}`;
   }
 
@@ -99,7 +98,9 @@ module.exports = function parseConfig (box) {
     try {
       decodeOptions = JSON.parse(decodeOptions);
     } catch (err) {
-      log.warn(`mqtt decode options of box ${box._id} not parseable: ${err}`);
+      log.warn({
+        'mqtt-client': `mqtt decode options of box ${box._id} not parseable: ${err}`
+      });
       decodeOptions = undefined;
     }
   }
@@ -132,12 +133,10 @@ module.exports = function parseConfig (box) {
 
         const { ok, n } = theBox.saveMeasurementsArray(decodedMeasurement);
         if (ok === n) {
-          log.info(
-            `received, decoded and saved mqtt message for box ${box._id}`
-          );
+          log.info({ 'mqtt-client': `received, decoded and saved mqtt message for box ${box._id}` });
         }
       } catch (err) {
-        log.error(`error saving mqtt message for box ${box._id}: ${err}`);
+        log.error({ 'mqtt-client': `error saving mqtt message for box ${box._id}: ${err}` });
       }
     }
   };

@@ -12,6 +12,7 @@ const { MqttService } = grpc.load(mqttProto);
 
 const connectBox = async function connectBox (call, callback) {
   const { box_id } = call.request;
+  log.info({ 'grpc-server': `Request connectBox for ${box_id} ` });
 
   try {
     const box = await Box.findById(
@@ -33,6 +34,7 @@ const connectBox = async function connectBox (call, callback) {
 
 const disconnectBox = function disconnectBox (call, callback) {
   const { box_id } = call.request;
+  log.info({ 'grpc-server': `Request disconnectBox for ${box_id} ` });
 
   MQTTClient.disconnect({ _id: box_id });
 
@@ -66,7 +68,7 @@ const prepareCredentials = function prepareCredentials () {
 
 const init = function init () {
   const port = Number(config.get('port'));
-  log.info(`Starting MQTT Integration GRPC server on port ${port}`);
+  log.info({ 'grpc-server': `Starting MQTT Integration GRPC server on port ${port}` });
 
   const credentials = prepareCredentials();
 
@@ -74,6 +76,7 @@ const init = function init () {
   server.addService(MqttService.service, { connectBox, disconnectBox });
   server.bind(`0.0.0.0:${port}`, credentials);
   server.start();
+  log.info({ 'grpc-server': 'MQTT Integration GRPC server started' });
 };
 
 module.exports = { init };

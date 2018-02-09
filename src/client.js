@@ -21,8 +21,7 @@ const getClient = function getClient (
   { url, connectionOptions, topic },
   maxRetries
 ) {
-  let errRetries = maxRetries,
-    closeRetries = maxRetries;
+  let errRetries = maxRetries, closeRetries = maxRetries;
 
   const client = mqtt.connect(url, connectionOptions);
   client.reconnecting = true;
@@ -73,28 +72,26 @@ const connect = async function connect (box) {
   if (!mqttCfg.enabled) {
     return;
   }
+  log.info({ 'mqtt-client': `connecting mqtt for box ${box._id}` });
 
   try {
     const client = await getClient(
       mqttCfg.internalConnectionOptions,
       NUMBER_RETRIES
     );
-    log.info(`connected mqtt for box ${box._id}`);
+    log.info({ 'mqtt-client': `connected mqtt for box ${box._id}` });
 
     mqttConnections[box._id] = client;
 
     client.on('close', function () {
-      log.info(`mqtt closed for box: ${box._id}`);
+      log.info({ 'mqtt-client': `mqtt closed for box: ${box._id}` });
     });
 
     client.on('message', mqttCfg.decodeAndSaveMessage);
   } catch (err) {
-    log.error(
-      err,
-      `mqtt error for box ${
-        box._id
-      }. Retry after ${RETRY_AFTER_MINUTES} minutes.`
-    );
+    log.error(err, {
+      'mqtt-client': `mqtt error for box ${box._id}. Retry after ${RETRY_AFTER_MINUTES} minutes.`
+    });
     // retry after..
     _retryAfter(box, RETRY_AFTER_MINUTES);
   }
@@ -104,7 +101,7 @@ const disconnect = function disconnect ({ _id }) {
   if (mqttConnections[_id]) {
     mqttConnections[_id].end(true);
     mqttConnections[_id] = undefined;
-    log.info(`mqtt disconnected mqtt for box ${_id}`);
+    log.info({ 'mqtt-client': `mqtt disconnected mqtt for box ${_id}` });
   }
 };
 
