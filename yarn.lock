@@ -6,9 +6,9 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@sensebox/eslint-config-sensebox/-/eslint-config-sensebox-1.1.0.tgz#2fec4ec7945f34e7296c619fabd589d722ecd984"
 
-"@sensebox/opensensemap-api-models@0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.7.tgz#302ec9e62c84fa5b92ab0b24acb602b025735552"
+"@sensebox/opensensemap-api-models@0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.8.tgz#fa79e4812efb4547d7b045a65dcc058be9de7b4c"
   dependencies:
     "@sensebox/osem-protos" "^1.1.0"
     "@sensebox/sketch-templater" "^1.1.1"
@@ -1598,9 +1598,9 @@ mqtt-packet@^5.4.0:
     process-nextick-args "^1.0.7"
     safe-buffer "^5.1.0"
 
-mqtt@^2.15.0:
-  version "2.15.2"
-  resolved "https://registry.yarnpkg.com/mqtt/-/mqtt-2.15.2.tgz#300290945646a4a6f3160b375460a17ade703583"
+mqtt@2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/mqtt/-/mqtt-2.15.1.tgz#86fc34e387495df60cd0ccb75cd97743344a4b28"
   dependencies:
     commist "^1.0.0"
     concat-stream "^1.6.0"
