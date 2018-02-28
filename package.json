@@ -20,11 +20,11 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
-    "@sensebox/opensensemap-api-models": "0.0.8",
+    "@sensebox/opensensemap-api-models": "0.0.9",
     "@sensebox/osem-protos": "^1.1.0",
     "bunyan": "^1.8.12",
     "config": "^1.28.1",
-    "grpc": "^1.7.3",
+    "grpc": "^1.9.0",
     "mqtt": "2.15.1"
   },
   "publishConfig": {
