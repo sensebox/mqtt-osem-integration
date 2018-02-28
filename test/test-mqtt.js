@@ -27,8 +27,8 @@ describe('mqtt client', function () {
           );
           setTimeout(() => {
             resolve();
-          }, 500);
-        }, 500);
+          }, 100);
+        }, 100);
       });
     });
   });
