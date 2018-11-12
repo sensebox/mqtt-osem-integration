@@ -20,7 +20,7 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
-    "@sensebox/opensensemap-api-models": "0.0.10",
+    "@sensebox/opensensemap-api-models": "^0.0.11-beta.0",
     "@sensebox/osem-protos": "^1.1.0",
     "bunyan": "^1.8.12",
     "config": "^1.28.1",

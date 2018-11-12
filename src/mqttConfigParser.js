@@ -129,7 +129,13 @@ module.exports = function parseConfig (box) {
           message.toString(),
           decodeOptions
         );
-        const theBox = await Box.findById(box._id);
+        // Populate lastMeasurement on box
+        const BOX_SUB_PROPS_FOR_POPULATION = [
+          {
+            path: 'sensors.lastMeasurement', select: { value: 1, createdAt: 1, _id: 0 }
+          },
+        ];
+        const theBox = await Box.findById(box._id).populate(BOX_SUB_PROPS_FOR_POPULATION);
 
         const { ok, n } = theBox.saveMeasurementsArray(decodedMeasurement);
         if (ok === n) {
