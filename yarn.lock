@@ -7,13 +7,13 @@
   resolved "https://registry.yarnpkg.com/@sensebox/eslint-config-sensebox/-/eslint-config-sensebox-1.1.0.tgz#2fec4ec7945f34e7296c619fabd589d722ecd984"
   integrity sha512-MhwFHGmt7X/Wb/aISS/pJvBuO8HqpkVfB8GsUKOosWEfvug4cTN7N/pXBOxINukG34LcKDLp1xdyxuEo64CMSw==
 
-"@sensebox/opensensemap-api-models@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.11.tgz#53fdd5272e7056828e459df84355c88258eaeee4"
-  integrity sha512-XVgD1HvY24QasM+MGA5UAqwAStVb3Ell/jdogCaIh2YN38f3bArNrpvW2GEAay3i+75BYsH24ryQV/hlieqDyQ==
+"@sensebox/opensensemap-api-models@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.12.tgz#16f46a8a4fad4279f2701e0ac78367d91afcfb6e"
+  integrity sha512-T5PxsE0vIPm8lh6lkwlaT8JTtVTUQtp5mHSVaLvuFc5997yp2JJ0xtOlxLJb0J0vn4gzJBAS5g1YrhoTQ3smNw==
   dependencies:
     "@sensebox/osem-protos" "^1.1.0"
-    "@sensebox/sketch-templater" "^1.3.0"
+    "@sensebox/sketch-templater" "^1.4.0"
     bcrypt "^1.0.2"
     bunyan "^1.8.12"
     config "^1.29.2"
@@ -32,10 +32,10 @@
   resolved "https://registry.yarnpkg.com/@sensebox/osem-protos/-/osem-protos-1.1.0.tgz#a7de8bc6be867953f1309181a012063c23299e79"
   integrity sha512-H+nUVcWlT0dvIqfJnYHuX9JBcCkP1ZKGE5YTRNWPbAEdZ11h+srpQsmeI58wK5hJcdukaZAjc4Dy96IeGM77aA==
 
-"@sensebox/sketch-templater@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@sensebox/sketch-templater/-/sketch-templater-1.3.0.tgz#ed17005eead6ab746d1439ee20133af938c34175"
-  integrity sha512-F+d5CLO/F8ptogX9u/DIB5Y3V+3Ag82aw/Doj5BCzURGEv4b0fHuUThBTFG4ewDPAQhud8KcjwbucM05aV2bSg==
+"@sensebox/sketch-templater@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@sensebox/sketch-templater/-/sketch-templater-1.4.0.tgz#f6b91651a372b5961dcae9c1490916953fc7b092"
+  integrity sha512-vRI6h1/UKxQ/suIu7ZTscYpfFQdroyeItX5NslA/4ZWtDrq0bDWD7L/I7VXkLgpYkc090D8GradF8heHaScgBQ==
   dependencies:
     config "^1.29.2"
     dedent "^0.7.0"
