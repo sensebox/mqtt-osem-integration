@@ -1,6 +1,7 @@
 'use strict';
 
-const grpc = require('grpc'),
+const grpcLibrary = require('@grpc/grpc-js'),
+  protoLoader = require('@grpc/proto-loader'),
   { Box } = require('@sensebox/opensensemap-api-models'),
   MQTTClient = require('./client'),
   fs = require('fs'),
@@ -8,7 +9,10 @@ const grpc = require('grpc'),
   config = require('config').get('grpc'),
   { mqttProto } = require('@sensebox/osem-protos');
 
-const { MqttService } = grpc.load(mqttProto);
+// const { MqttService } = grpc.load(mqttProto);
+const packageDefinition = protoLoader.loadSync(mqttProto);
+const MqttService = grpcLibrary.loadPackageDefinition(packageDefinition).MqttService;
+
 
 const connectBox = async function connectBox (call, callback) {
   const { box_id } = call.request;
@@ -54,7 +58,7 @@ const prepareCredentials = function prepareCredentials () {
     return fs.readFileSync(config_key);
   });
 
-  return grpc.ServerCredentials.createSsl(
+  return grpcLibrary.ServerCredentials.createSsl(
     certs[0],
     [
       {
@@ -72,7 +76,7 @@ const init = function init () {
 
   const credentials = prepareCredentials();
 
-  const server = new grpc.Server();
+  const server = new grpcLibrary.Server();
   server.addService(MqttService.service, { connectBox, disconnectBox });
   server.bind(`0.0.0.0:${port}`, credentials);
   server.start();
