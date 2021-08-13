@@ -78,9 +78,10 @@ const init = function init () {
 
   const server = new grpcLibrary.Server();
   server.addService(MqttService.service, { connectBox, disconnectBox });
-  server.bind(`0.0.0.0:${port}`, credentials);
-  server.start();
-  log.info({ 'grpc-server': 'MQTT Integration GRPC server started' });
+  server.bindAsync(`0.0.0.0:${port}`, credentials, () => {
+    server.start();
+    log.info({ 'grpc-server': 'MQTT Integration GRPC server started' });
+  });
 };
 
 module.exports = { init };
