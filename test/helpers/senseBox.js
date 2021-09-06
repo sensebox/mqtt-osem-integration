@@ -5,7 +5,7 @@ module.exports = function senseBox (
   { enabled, url, topic, connectionOptions, decodeOptions, messageFormat } = {
     // defaults
     enabled: true,
-    url: 'mqtt://localhost:1884',
+    url: 'mqtt://localhost:8883',
     topic: 'generalTestTopic',
     messageFormat: 'csv'
   }
