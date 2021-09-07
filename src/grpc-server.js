@@ -10,7 +10,13 @@ const grpcLibrary = require('@grpc/grpc-js'),
   { mqttProto } = require('@sensebox/osem-protos');
 
 // const { MqttService } = grpc.load(mqttProto);
-const packageDefinition = protoLoader.loadSync(mqttProto);
+const packageDefinition = protoLoader.loadSync(mqttProto, {
+  keepCase: true,
+  longs: String,
+  enums: String,
+  defaults: true,
+  oneofs: true,
+});
 const MqttService = grpcLibrary.loadPackageDefinition(packageDefinition).MqttService;
 
 
