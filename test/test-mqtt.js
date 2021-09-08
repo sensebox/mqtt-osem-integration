@@ -28,7 +28,7 @@ describe('mqtt client', function () {
           );
           setTimeout(() => {
             resolve();
-          }, 100);
+          }, 1000);
         }, 100);
       });
     });
@@ -64,7 +64,7 @@ describe('mqtts client', function () {
           );
           setTimeout(() => {
             resolve();
-          }, 100);
+          }, 1000);
         }, 100);
       });
     });
