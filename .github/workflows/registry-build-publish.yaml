@@ -77,7 +77,7 @@ jobs:
 
       - name: Execute tests
         run: |
-          - yarn test
+          yarn test
 
   build-and-push-images:
     runs-on: ubuntu-latest
