@@ -1,11 +1,13 @@
 'use strict';
 
+const config = require('config').get('mqtts_test_client');
+
 module.exports = function mqttsBox (
   // parameter destructuring
   { enabled, url, topic, connectionOptions, decodeOptions, messageFormat } = {
     // defaults
     enabled: true,
-    url: '<your.mqtts.connection.string>',
+    url: config.get('url'),
     topic: 'generalTestTopic',
     messageFormat: 'csv',
   }

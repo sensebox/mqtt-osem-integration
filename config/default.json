@@ -10,5 +10,8 @@
       "server_cert": "",
       "server_key": ""
     }
+  },
+  "mqtts_test_client:": {
+    "url": ""
   }
 }
