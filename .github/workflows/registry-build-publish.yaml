@@ -11,8 +11,52 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  MQTTS_TEST_URL: ${{ secrets.MQTTS_URL }}
 
 jobs:
+
+  lint:
+    name: Lint code
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Node.js 14
+        uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 14
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: |
+          echo "##[set-output name=dir;]$(yarn cache dir)"
+      - name: Restore yarn cache
+        uses: actions/cache@v2.1.6
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install project dependencies
+        run: |
+          yarn --prefer-offline --pure-lockfile
+      - name: Run eslint
+        run: |
+          yarn run lint:ci
+
+  test:
+    name: Run tests
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Execute tests
+        run: |
+          - yarn test
+
   build-and-push-images:
     runs-on: ubuntu-latest
     permissions:
