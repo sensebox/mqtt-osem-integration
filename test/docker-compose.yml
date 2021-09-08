@@ -5,6 +5,7 @@ services:
     image: eclipse-mosquitto:2.0.12
     ports:
       - "8883:8883"
+      - "8884:8884"
     volumes:
       - ./mosquitto:/mosquitto/config
   db:

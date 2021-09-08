@@ -1,17 +1,17 @@
 'use strict';
 
-module.exports = function senseBox (
+module.exports = function wssBox (
   // parameter destructuring
   { enabled, url, topic, connectionOptions, decodeOptions, messageFormat } = {
     // defaults
     enabled: true,
-    url: 'mqtt://localhost:8883',
+    url: 'ws://localhost:8884',
     topic: 'generalTestTopic',
-    messageFormat: 'csv'
+    messageFormat: 'csv',
   }
 ) {
   return {
-    name: 'mqttTestSenseBox',
+    name: 'wsTestSenseBox',
     location: [7.62, 51.96],
     exposure: 'outdoor',
     model: 'homeEthernet',
