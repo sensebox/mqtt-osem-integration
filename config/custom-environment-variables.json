@@ -10,5 +10,8 @@
       "server_cert": "OSEM_MQTT_GRPC_SERVER_CERT",
       "server_key": "OSEM_MQTT_GRPC_SERVER_KEY"
     }
+  },
+  "mqtts_test_client": {
+    "url": "MQTTS_TEST_URL"
   }
 }

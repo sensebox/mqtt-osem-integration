@@ -1,10 +1,13 @@
-version: "2"
+version: "3.9"
 
 services:
   mosquitto:
-    image: eclipse-mosquitto:1.4.12
+    image: eclipse-mosquitto:2.0.12
     ports:
-      - "1884:1883"
+      - "8883:8883"
+      - "8884:8884"
+    volumes:
+      - ./mosquitto:/mosquitto/config
   db:
     image: mongo:3.2
     ports:

@@ -1,17 +1,19 @@
 'use strict';
 
-module.exports = function senseBox (
+const config = require('config').get('mqtts_test_client');
+
+module.exports = function mqttsBox (
   // parameter destructuring
   { enabled, url, topic, connectionOptions, decodeOptions, messageFormat } = {
     // defaults
     enabled: true,
-    url: 'mqtt://localhost:8883',
+    url: config.get('url'),
     topic: 'generalTestTopic',
-    messageFormat: 'csv'
+    messageFormat: 'csv',
   }
 ) {
   return {
-    name: 'mqttTestSenseBox',
+    name: 'mqttsTestSenseBox',
     location: [7.62, 51.96],
     exposure: 'outdoor',
     model: 'homeEthernet',
