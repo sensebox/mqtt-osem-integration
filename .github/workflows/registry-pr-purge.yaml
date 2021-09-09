@@ -3,7 +3,6 @@ name: Purge Pull Request Image
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#registry_package
 # Run cleanup job if a new package was published or updated
 on:
-  workflow_dispatch:
   pull_request:
     types: [closed]
 
@@ -18,4 +17,3 @@ jobs:
           organization: ${{ github.repository_owner}}
           container: ${{ github.event.repository.name }}
           tag-regex: pr-${{github.event.pull_request.number}}$
-          dry-run: true
