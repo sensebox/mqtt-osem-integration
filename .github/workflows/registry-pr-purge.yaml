@@ -17,5 +17,5 @@ jobs:
           token: ${{ secrets.GHCR_TOKEN}}
           organization: ${{ github.repository_owner}}
           container: ${{ github.event.repository.name }}
-          tag-regex: pr-10
+          tag-regex: pr-10$
           dry-run: true
