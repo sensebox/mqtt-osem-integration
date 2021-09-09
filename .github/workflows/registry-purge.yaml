@@ -3,7 +3,6 @@ name: Docker Registry Cleanup
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#registry_package
 # Run cleanup job if a new package was published or updated
 on:
-  workflow_dispatch:
   registry_package:
 
 jobs:

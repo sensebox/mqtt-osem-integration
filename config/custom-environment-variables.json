@@ -13,5 +13,8 @@
   },
   "mqtts_test_client": {
     "url": "MQTTS_TEST_URL"
+  },
+  "wss_test_client": {
+    "url": "WSS_TEST_URL"
   }
 }
