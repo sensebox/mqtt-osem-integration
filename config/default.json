@@ -1,9 +1,4 @@
 {
-  "openSenseMap-API-models": {
-    "db": {
-      "mongo_uri": "mongodb://localhost:27017/osem-mqtt"
-    }
-  },
   "mqtt_client": {
     "num_retries": 5,
     "retry_after_minutes": 10
