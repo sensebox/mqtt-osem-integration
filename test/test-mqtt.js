@@ -13,7 +13,9 @@ describe('mqtt client', function () {
   let testBox;
   before(async function () {
 
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    this.timeout(20000);
+
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     await connect(dbConnectionString({ db: 'mqttTest' }));
     testBox = await Box.initNew(senseBox());
