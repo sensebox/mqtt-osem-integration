@@ -11,7 +11,7 @@
     "lint": "eslint --ignore-pattern node_modules --fix \"{src,test,.scripts}/**/*.js\"",
     "lint:ci": "eslint --ignore-pattern node_modules \"{test,packages}/**/*.js\"",
     "pretest": "docker-compose -f test/docker-compose.yml up -d",
-    "test": "mocha test/index.js || npm run posttest",
+    "test": "mocha test/index.js",
     "posttest": "docker-compose -f test/docker-compose.yml down -v",
     "only-test": "mocha --inspect-brk test/index.js"
   },
