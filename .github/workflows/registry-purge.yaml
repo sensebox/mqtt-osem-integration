@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: clean packages
-        uses: vlaurin/action-ghcr-prune@v0.2.0
+        uses: vlaurin/action-ghcr-prune@v0.5.0
         with:
           token: ${{ secrets.GHCR_TOKEN}}
           organization: ${{ github.repository_owner}}
           container: ${{ github.event.repository.name }}
-          untagged: true
+          prune-untagged: true
           dry-run: false
