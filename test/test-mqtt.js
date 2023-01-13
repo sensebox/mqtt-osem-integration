@@ -51,7 +51,6 @@ describe('mqtts client', function () {
     await connect(dbConnectionString({ db: 'mqttTest' }));
 
     testBox = await Box.initNew(mqttsBox());
-    console.log(JSON.stringify(testBox));
     mqttClient.connect(testBox);
     const mqclient = mqtt.connect(testBox.integrations.mqtt.url);
 
