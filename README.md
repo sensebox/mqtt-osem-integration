@@ -41,7 +41,7 @@ Its possible to supply your configuration json through the `NODE_CONFIG` environ
 
 ## Container images and Versions
 
-Container images for this service are created on each push on [Docker Hub].
+Container images for this service are created on each push on [Github Container Registry].
 
 Stable versions should be tagged using `yarn version` and `git push --follow-tags origin master`
 
@@ -49,4 +49,4 @@ Stable versions should be tagged using `yarn version` and `git push --follow-tag
 [node-config]: https://github.com/lorenwest/node-config
 [mongoDB Connection String]: https://docs.mongodb.com/v3.2/reference/connection-string/
 [osem-protos]: https://github.com/sensebox/osem-protos/blob/master/mqtt/mqtt.proto
-[Docker Hub]: https://hub.docker.com/r/sensebox/mqtt-osem-integration
+[Github Container Registry]: https://github.com/sensebox/mqtt-osem-integration/pkgs/container/mqtt-osem-integration

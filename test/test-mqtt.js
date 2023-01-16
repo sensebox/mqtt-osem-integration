@@ -12,8 +12,12 @@ const expect = require('chai').expect,
 describe('mqtt client', function () {
   let testBox;
   before(async function () {
-    await connect(dbConnectionString({ db: 'mqttTest' }));
 
+    this.timeout(20000);
+
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    await connect(dbConnectionString({ db: 'mqttTest' }));
     testBox = await Box.initNew(senseBox());
     mqttClient.connect(testBox);
     const mqclient = mqtt.connect(testBox.integrations.mqtt.url);
@@ -49,7 +53,6 @@ describe('mqtts client', function () {
   let testBox;
   before(async function () {
     await connect(dbConnectionString({ db: 'mqttTest' }));
-
     testBox = await Box.initNew(mqttsBox());
     mqttClient.connect(testBox);
     const mqclient = mqtt.connect(testBox.integrations.mqtt.url);

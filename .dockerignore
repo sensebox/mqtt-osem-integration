@@ -14,3 +14,6 @@ test
 Dockerfile
 certstrap-notes
 grpc-test-client.js
+scripts
+seeds
+docker-compose.yml

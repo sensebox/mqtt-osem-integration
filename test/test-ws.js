@@ -15,6 +15,9 @@ const expect = require('chai').expect,
 describe('ws client', function () {
   let testBox;
   before(async function () {
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
     await connect(dbConnectionString({ db: 'mqttTest' }));
 
     testBox = await Box.initNew(wsBox());

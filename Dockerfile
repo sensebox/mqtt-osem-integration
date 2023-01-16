@@ -1,28 +1,28 @@
-FROM node:14-alpine as build
+# --------------> The build image
+FROM node:16.19.0-bullseye-slim as build
 
-RUN apk --no-cache --virtual .build add build-base python
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends git dumb-init
 
-# taken from node:6-onbuild
-#RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # copy in main package.json and yarn.lock
 COPY package.json /usr/src/app/
 COPY yarn.lock /usr/src/app/
 
-# npm rebuild is required because the prebuilt binaries are not compatible with musl
-# remove when https://github.com/kelektiv/node.bcrypt.js/issues/528 is resolved
-# RUN yarn install --pure-lockfile --production \
-#   && npm rebuild bcrypt --build-from-source
-
 RUN yarn install --pure-lockfile --production
 
 COPY . /usr/src/app
 
-# Final stage
-FROM node:14-alpine
+# --------------> The production image
+FROM node:16.19.0-bullseye-slim
+
+ENV NODE_ENV=production
+COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
+USER node
 
 WORKDIR /usr/src/app
-COPY --from=build /usr/src/app /usr/src/app
 
-CMD [ "yarn", "start" ]
+COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/src/app/node_modules
+COPY --chown=node:node . /usr/src/app
+
+CMD ["dumb-init", "node", "src/index.js"]

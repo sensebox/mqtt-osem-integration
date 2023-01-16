@@ -1,16 +1,21 @@
-# Create CA:
-```
+# How to create certificates
+
+## Create CA
+
+```bash
 certstrap init --common-name "openSenseMapCA"
 ```
 
-# Create certificate requests for the server and client
-```
+## Create certificate requests for the server and client
+
+```bash
 certstrap request-cert --key out/openSenseMapCA.key --common-name "mqtt-integration server" --domain mqtt-integration,localhost
 certstrap request-cert --key out/openSenseMapCA.key --common-name "mqtt-integration client" --domain api,localhost
 ```
 
-# Sign the certificate requests
-```
+## Sign the certificate requests
+
+```bash
 certstrap sign --CA "openSenseMapCA" mqtt-integration_server
 certstrap sign --CA "openSenseMapCA" mqtt-integration_client
 ```
