@@ -18,7 +18,7 @@
   "devDependencies": {
     "@sensebox/eslint-config-sensebox": "^1.0.0",
     "chai": "^4.1.0",
-    "eslint": "^8.32.0",
+    "eslint": "^8.34.0",
     "mocha": "^10.0.0"
   },
   "dependencies": {
