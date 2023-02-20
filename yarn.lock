@@ -17,17 +17,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@grpc/grpc-js@^1.3.7":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.3.7.tgz#58b687aff93b743aafde237fd2ee9a3259d7f2d8"
-  integrity sha512-CKQVuwuSPh40tgOkR7c0ZisxYRiN05PcKPW72mQL5y++qd7CwBRoaJZvU5xfXnCJDFBmS3qZGQ71Frx6Ofo2XA==
-  dependencies:
-    "@types/node" ">=12.12.47"
-
-"@grpc/grpc-js@^1.8.0":
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.8.4.tgz#316674e8905e2dd310d8aa60331e05b32584e6ad"
-  integrity sha512-oaETBotls7FTBpySg5dhyUCyXSxSeCMmkBBXHXG1iw57MiNoB6D7VRhkrXYbwyHM3Q3Afjp4KlsBX0Zb+ELZXw==
+"@grpc/grpc-js@^1.3.7", "@grpc/grpc-js@^1.8.9":
+  version "1.8.9"
+  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.8.9.tgz#84e9167dc80b0c3a98608e14b839458bf0df684d"
+  integrity sha512-xzsl2HamhovnZddS/2pMF4Q+FgwINaBvxoFGQ+G54Lo7Xsge36VvfDO/TDkL7FofmrRK/X5weRvwlJh7rKwN4w==
   dependencies:
     "@grpc/proto-loader" "^0.7.0"
     "@types/node" ">=12.12.47"
