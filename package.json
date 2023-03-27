@@ -24,7 +24,7 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.8.0",
     "@grpc/proto-loader": "^0.7.0",
-    "@sensebox/opensensemap-api-models": "2.0.3",
+    "@sensebox/opensensemap-api-models": "3.0.0",
     "@sensebox/osem-protos": "^1.1.0",
     "mqtt": "^4.2.8"
   },
