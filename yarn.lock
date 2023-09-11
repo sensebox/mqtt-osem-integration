@@ -176,10 +176,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@sensebox/eslint-config-sensebox@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@sensebox/eslint-config-sensebox/-/eslint-config-sensebox-1.1.0.tgz#2fec4ec7945f34e7296c619fabd589d722ecd984"
-  integrity sha512-MhwFHGmt7X/Wb/aISS/pJvBuO8HqpkVfB8GsUKOosWEfvug4cTN7N/pXBOxINukG34LcKDLp1xdyxuEo64CMSw==
+"@sensebox/eslint-config-sensebox@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@sensebox/eslint-config-sensebox/-/eslint-config-sensebox-1.1.1.tgz#18d8564d2cdd441e1e541c02af288a1a65d03786"
+  integrity sha512-v/8ISGGs1ZrhqxoscdjjPdJSq74te9j1HfNxjemeyVggPjkBEwWa9CWUgIbmZMxnGdvYYlDPO4Gm68WIXkvKkw==
 
 "@sensebox/opensensemap-api-models@2.0.3":
   version "2.0.3"
