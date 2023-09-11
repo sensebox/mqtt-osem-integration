@@ -1,5 +1,8 @@
 'use strict';
 
-const bunyan = require('bunyan');
+const pino = require('pino');
 
-module.exports = bunyan.createLogger({ name: 'mqtt-osem-integration' });
+module.exports = pino({
+  name: 'mqtt-osem-integration',
+  serializers: pino.stdSerializers,
+});
