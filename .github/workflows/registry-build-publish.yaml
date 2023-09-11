@@ -2,11 +2,11 @@ name: Build and publish to Github Container Registry
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     tags: [ 'v*.*.*' ]
   pull_request:
     branches:
-      - master
+      - main
 
 env:
   REGISTRY: ghcr.io
@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "##[set-output name=dir;]$(yarn cache dir)"
       - name: Restore yarn cache
-        uses: actions/cache@v3.3.1
+        uses: actions/cache@v3.3.2
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -63,7 +63,7 @@ jobs:
         run: |
           echo "##[set-output name=dir;]$(yarn cache dir)"
       - name: Restore yarn cache
-        uses: actions/cache@v3.3.1
+        uses: actions/cache@v3.3.2
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
