@@ -4,6 +4,30 @@ volumes:
   mongo-data:
 
 services:
+
+  integration:
+    build: .
+    container_name: mqtt-integration
+    volumes:
+      - ./out:/certs
+    environment:
+      NODE_ENV: production
+      NODE_CONFIG: |-
+        {
+          "grpc": {
+            "certificates": {
+              "ca_cert": "/certs/openSenseMapCA.crt",
+              "server_cert": "/certs/mqtt-integration_server.crt",
+              "server_key": "/certs/mqtt-integration_server.key"
+            }
+          },
+          "openSenseMap-API-models": {
+            "db": {
+              "mongo_uri": "mongodb://db:27017/osem-mqtt"
+            }
+          }
+        }
+
   db:
     image: mongo:5
     container_name: osem-dev-mongo
