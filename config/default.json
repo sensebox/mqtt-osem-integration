@@ -1,4 +1,9 @@
 {
+  "openSenseMap-API-models": {
+    "db": {
+      "mongo_uri": "mongodb://localhost:27017/osem-mqtt"
+    }
+  },
   "mqtt_client": {
     "num_retries": 5,
     "retry_after_minutes": 10
@@ -6,9 +11,9 @@
   "grpc": {
     "port": 3925,
     "certificates": {
-      "ca_cert": "",
-      "server_cert": "",
-      "server_key": ""
+      "ca_cert": "./out/openSenseMapCA.crt",
+      "server_cert": "./out/mqtt-integration_server.crt",
+      "server_key": "./out/mqtt-integration_server.key"
     }
   },
   "mqtts_test_client:": {

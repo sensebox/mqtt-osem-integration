@@ -9,8 +9,8 @@ certstrap init --common-name "openSenseMapCA"
 ## Create certificate requests for the server and client
 
 ```bash
-certstrap request-cert --key out/openSenseMapCA.key --common-name "mqtt-integration server" --domain mqtt-integration,localhost
-certstrap request-cert --key out/openSenseMapCA.key --common-name "mqtt-integration client" --domain api,localhost
+certstrap request-cert --common-name "mqtt-integration server"
+certstrap request-cert --common-name "mqtt-integration client"
 ```
 
 ## Sign the certificate requests
