@@ -1,5 +1,5 @@
 # --------------> The build image
-FROM node:18.17.1-bookworm-slim as build
+FROM node:18.17.1-bullseye-slim as build
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends git dumb-init
 
@@ -14,7 +14,7 @@ RUN yarn install --pure-lockfile --production
 COPY . /usr/src/app
 
 # --------------> The production image
-FROM node:18.17.1-bookworm-slim
+FROM node:18.17.1-bullseye-slim
 
 ENV NODE_ENV=production
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
