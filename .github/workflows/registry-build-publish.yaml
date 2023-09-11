@@ -2,11 +2,11 @@ name: Build and publish to Github Container Registry
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     tags: [ 'v*.*.*' ]
   pull_request:
     branches:
-      - master
+      - main
 
 env:
   REGISTRY: ghcr.io
@@ -19,19 +19,19 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install Node.js 16
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: |
           echo "##[set-output name=dir;]$(yarn cache dir)"
       - name: Restore yarn cache
-        uses: actions/cache@v3.3.1
+        uses: actions/cache@v3.3.2
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -51,19 +51,19 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install Node.js 16
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: |
           echo "##[set-output name=dir;]$(yarn cache dir)"
       - name: Restore yarn cache
-        uses: actions/cache@v3.3.1
+        uses: actions/cache@v3.3.2
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -90,10 +90,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Log in to the Container registry
-        uses: docker/login-action@v2.1.0
+        uses: docker/login-action@v2.2.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -101,7 +101,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v4.3.0
+        uses: docker/metadata-action@v4.6.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
@@ -110,7 +110,7 @@ jobs:
             suffix=
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4.0.0
+        uses: docker/build-push-action@v4.2.1
         with:
           context: .
           push: true
