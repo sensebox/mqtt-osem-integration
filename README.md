@@ -26,6 +26,14 @@ See [config/default.json](config/default.json). You should at least configure th
       }
     }
 
+### Development
+
+To get up and running for development run the following steps:
+
+- Run `./scripts/setup_certs.sh` for generating development certificates.
+- Set the MQTT URL in row 23 in `./seeds/devices.json`
+- Run `docker-compose up -d`
+
 ## Environment variables
 
 Its possible to supply your configuration json through the `NODE_CONFIG` environment variable. It is also possible to configure through custom environment variables:
@@ -47,6 +55,5 @@ Stable versions should be tagged using `yarn version` and `git push --follow-tag
 
 [openSenseMap API]: https://github.com/sensebox/openSenseMap-API
 [node-config]: https://github.com/lorenwest/node-config
-[mongoDB Connection String]: https://docs.mongodb.com/v3.2/reference/connection-string/
 [osem-protos]: https://github.com/sensebox/osem-protos/blob/master/mqtt/mqtt.proto
 [Github Container Registry]: https://github.com/sensebox/mqtt-osem-integration/pkgs/container/mqtt-osem-integration
