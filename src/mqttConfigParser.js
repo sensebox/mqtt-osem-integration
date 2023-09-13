@@ -2,6 +2,7 @@
 
 const log = require('./logger'),
   { decoding, Box } = require('@sensebox/opensensemap-api-models');
+const { sendWebsocketMessage } = require('./websocket-server');
 
 // see https://github.com/mqttjs/MQTT.js#client
 const USER_CONNECT_OPTIONS_ALLOWED_KEYS = [
@@ -88,9 +89,9 @@ module.exports = function parseConfig (box) {
   try {
     connectionOptions = parseUserConnectionOptions(connectionOptions);
   } catch (err) {
-    throw new Error(
-      `Connection options of box ${box._id} not parseable: ${err}`
-    );
+    const msg = `🚨 Connection options of box ${box._id} not parseable: ${err}`;
+    sendWebsocketMessage(box._id, msg);
+    throw new Error(msg);
   }
 
   // validate decodeOptions
@@ -98,9 +99,11 @@ module.exports = function parseConfig (box) {
     try {
       decodeOptions = JSON.parse(decodeOptions);
     } catch (err) {
-      log.warn({
-        'mqtt-client': `mqtt decode options of box ${box._id} not parseable: ${err}`
-      });
+      const msg = {
+        'mqtt-client': `⚠️ mqtt decode options of box ${box._id} not parseable: ${err}`,
+      };
+      sendWebsocketMessage(box._id, msg);
+      log.warn(msg);
       decodeOptions = undefined;
     }
   }
@@ -139,10 +142,18 @@ module.exports = function parseConfig (box) {
 
         const { ok, n } = theBox.saveMeasurementsArray(decodedMeasurement);
         if (ok === n) {
-          log.info({ 'mqtt-client': `received, decoded and saved mqtt message for box ${box._id}` });
+          const msg = {
+            'mqtt-client': `✅ received, decoded and saved mqtt message for box ${box._id}`,
+          };
+          sendWebsocketMessage(box._id, msg);
+          log.info(msg);
         }
       } catch (err) {
-        log.error({ 'mqtt-client': `error saving mqtt message for box ${box._id}: ${err}` });
+        const msg = {
+          'mqtt-client': `🚨 error saving mqtt message for box ${box._id}: ${err}`,
+        };
+        sendWebsocketMessage(box._id, msg);
+        log.error(msg);
       }
     }
   };

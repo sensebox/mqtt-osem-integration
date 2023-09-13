@@ -6,7 +6,8 @@ const {
   } = require('@sensebox/opensensemap-api-models'),
   log = require('./logger.js'),
   MQTTClient = require('./client'),
-  grpcServer = require('./grpc-server');
+  grpcServer = require('./grpc-server'),
+  websocketServer = require('./websocket-server.js');
 
 const findMQTTBoxes = function findMQTTBoxes () {
   return Box.find(
@@ -33,6 +34,7 @@ const onDbConnected = async function onDbConnected () {
   // start the grpc server
   try {
     grpcServer.init();
+    websocketServer.init();
   } catch (err) {
     log.fatal(err);
     mongoose.disconnect().then(function () {
