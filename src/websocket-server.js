@@ -4,12 +4,12 @@ const express = require('express');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 
+const config = require('config').get('websocket');
 const log = require('./logger.js');
 
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
-const PORT = 4000;
 
 // Middleware
 io.use((socket, next) => {
@@ -31,8 +31,9 @@ io.on('connection', (socket) => {
 });
 
 const init = function init () {
-  httpServer.listen(PORT, () => {
-    log.info(`🔌 Websocket server is listening on ${PORT}`);
+  const port = Number(config.get('port'));
+  httpServer.listen(port, () => {
+    log.info(`🔌 Websocket server is listening on ${port}`);
   });
 };
 

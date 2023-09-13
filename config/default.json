@@ -16,6 +16,9 @@
       "server_key": "./out/mqtt-integration_server.key"
     }
   },
+  "websocket": {
+    "port": 5173
+  },
   "mqtts_test_client:": {
     "url": ""
   },
