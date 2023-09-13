@@ -6,19 +6,19 @@ const { Server } = require('socket.io');
 
 const config = require('config').get('websocket');
 const log = require('./logger.js');
+const { verifyJwt } = require('./lib/helpers.js');
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:8000',
+    credentials: true
+  }
+});
 
 // Middleware
-io.use((socket, next) => {
-  // Check if user is logged in
-
-  // check if user is owner of device
-
-  next();
-});
+io.use(verifyJwt);
 
 io.on('connection', (socket) => {
   log.info(`⚡: ${socket.id} user just connected!`);

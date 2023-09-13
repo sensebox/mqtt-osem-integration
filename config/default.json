@@ -19,6 +19,12 @@
   "websocket": {
     "port": 5173
   },
+  "jwt": {
+    "secret": "OH GOD THIS IS SO INSECURE PLS CHANGE ME",
+    "algorithm": "HS256",
+    "validity_ms": 3600000,
+    "issuer": "https://localhost"
+  },
   "mqtts_test_client:": {
     "url": ""
   },
