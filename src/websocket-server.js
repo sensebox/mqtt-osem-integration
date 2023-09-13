@@ -37,13 +37,7 @@ const init = function init () {
 };
 
 const sendWebsocketMessage = function sendWebsocketMessage (deviceId, message) {
-  io.to(deviceId).emit('messages', message, (err, response) => {
-    if (err) {
-      log.error('🚨', err);
-    } else {
-      log.info('✅', response);
-    }
-  });
+  io.to(`${deviceId}`).emit('messages', message);
 };
 
 module.exports = { init, sendWebsocketMessage };
