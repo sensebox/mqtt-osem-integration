@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "6501d29ea487d615ea2ade5b"
+  },
+  "createdAt": {
+    "$date": "2023-09-13T15:17:50.974Z"
+  },
+  "updatedAt": {
+    "$date": "2023-09-13T15:34:40.019Z"
+  },
+  "name": "Max Mustermann",
+  "email": "m.mustermann@example.com",
+  "resetPasswordExpires": {
+    "$date": "2023-09-13T14:17:50.972Z"
+  },
+  "resetPasswordToken": "",
+  "hashedPassword": "$2b$13$vilqbrr1t11UGxifhpEyOOoswLEF3sjqwAZxEp/xsKD9WtKMXcypK",
+  "emailIsConfirmed": false,
+  "emailConfirmationToken": "f56dbe33-422a-44ec-b625-8180008bf0c5",
+  "lastUpdatedBy": "System",
+  "role": "user",
+  "language": "en_US",
+  "sharedBoxes": [],
+  "boxes": [
+    {
+      "$oid": "64ff1076088f2df36ed4d8ab"
+    }
+  ],
+  "refreshToken": "Q4cVkKO1qxeW8ybDHFwrdbwbGRJz+jEBzmhirbsH4bI=",
+  "refreshTokenExpires": {
+    "$date": "2023-09-20T15:34:26.933Z"
+  }
+}]
