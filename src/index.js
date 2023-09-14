@@ -49,3 +49,14 @@ connect()
   .catch(function onDbError (err) {
     log.fatal({ err });
   });
+
+const closeGracefully = async function closeGracefully (signal) {
+  log.info(`*^°@4=> Terminating: ${signal}`);
+
+  // shutdown server
+  // close db connection
+  process.exit();
+};
+
+process.on('SIGINT', closeGracefully);
+process.on('SIGTERM', closeGracefully);
