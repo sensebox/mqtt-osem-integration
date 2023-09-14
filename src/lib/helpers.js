@@ -46,9 +46,15 @@ const verifyJwt = function verifyJwt (socket, next) {
           throw new Error();
         }
 
-        // TODO: Check if deviceId is owned by user
+        // Check if deviceId is owned by user
+        try {
+          user.checkBoxOwner(socket.handshake.query.deviceId);
 
-        return next();
+          return next();
+        } catch (error) {
+          return next(new ForbiddenError(jwtInvalidErrorMessage));
+        }
+
       })
       .catch(function () {
         return next(new ForbiddenError(jwtInvalidErrorMessage));

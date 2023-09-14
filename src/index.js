@@ -54,7 +54,10 @@ const closeGracefully = async function closeGracefully (signal) {
   log.info(`*^°@4=> Terminating: ${signal}`);
 
   // shutdown server
+  websocketServer.shutdown();
+
   // close db connection
+
   process.exit();
 };
 

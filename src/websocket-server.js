@@ -17,7 +17,7 @@ const io = new Server(httpServer, {
   }
 });
 
-// Middleware
+// Middleware - Auth
 io.use(verifyJwt);
 
 io.on('connection', (socket) => {
@@ -37,8 +37,21 @@ const init = function init () {
   });
 };
 
+const shutdown = function shutdown () {
+  // socket.io
+  io.disconnectSockets();
+  io.close();
+
+  // express and http server
+  httpServer.close();
+};
+
 const sendWebsocketMessage = function sendWebsocketMessage (deviceId, message) {
   io.to(`${deviceId}`).emit('messages', message);
 };
 
-module.exports = { init, sendWebsocketMessage };
+module.exports = {
+  init,
+  sendWebsocketMessage,
+  shutdown
+};
