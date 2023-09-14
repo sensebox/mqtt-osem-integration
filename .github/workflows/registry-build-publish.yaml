@@ -18,67 +18,46 @@ jobs:
     name: Lint code
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout repository
+      - name: ⬇️ Checkout repository
         uses: actions/checkout@v4
 
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          cache: npm
+          cache-dependency-path: ./package.json
+          node-version: 20
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: |
-          echo "##[set-output name=dir;]$(yarn cache dir)"
-      - name: Restore yarn cache
-        uses: actions/cache@v3.3.2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: Install project dependencies
-        run: |
-          yarn --prefer-offline --pure-lockfile
-      - name: Run eslint
-        run: |
-          yarn run lint:ci
+        run: npm install
+
+      - name: 🔬 Lint
+        run: npm run lint:ci
 
   test:
     name: Run tests
     runs-on: ubuntu-20.04
 
     steps:
-      - name: Checkout repository
+      - name: ⬇️ Checkout repository
         uses: actions/checkout@v4
 
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          cache: npm
+          cache-dependency-path: ./package.json
+          node-version: 20
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: |
-          echo "##[set-output name=dir;]$(yarn cache dir)"
-      - name: Restore yarn cache
-        uses: actions/cache@v3.3.2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: Install project dependencies
         run: |
-          yarn --prefer-offline --pure-lockfile
+          npm install --include=dev
 
-      - name: Execute tests
+      - name: ⚡ Execute tests
         run: |
           export MQTTS_TEST_URL=${{ secrets.MQTTS_URL }}
           export WSS_TEST_URL=${{ secrets.WSS_URL }}
-          yarn test
+          npm run test
 
   build-and-push-images:
     runs-on: ubuntu-latest
