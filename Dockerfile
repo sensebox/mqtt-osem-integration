@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 
 # copy in main package.json and package-lock.lock
 COPY package.json /usr/src/app/
-COPY package-lock.lock /usr/src/app/
+COPY package-lock.json /usr/src/app/
 
 RUN npm ci --only=production
 
