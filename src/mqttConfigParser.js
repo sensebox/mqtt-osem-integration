@@ -140,7 +140,7 @@ module.exports = function parseConfig (box) {
 
         const theBox = await Box.findById(box._id).populate(BOX_SUB_PROPS_FOR_POPULATION);
 
-        const { ok, n } = theBox.saveMeasurementsArray(decodedMeasurement);
+        const { ok, n } = await theBox.saveMeasurementsArray(decodedMeasurement);
         if (ok === n) {
           const msg = {
             'mqtt-client': `✅ received, decoded and saved mqtt message for box ${box._id}`,
