@@ -103,7 +103,7 @@ module.exports = function parseConfig (box) {
       };
       decodeOptions = undefined;
       log.warn(msg);
-      throw new Error(msg);
+      sendWebsocketMessage(box._id, msg);
     }
   }
 
