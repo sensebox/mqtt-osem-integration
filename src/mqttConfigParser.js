@@ -90,7 +90,6 @@ module.exports = function parseConfig (box) {
     connectionOptions = parseUserConnectionOptions(connectionOptions);
   } catch (err) {
     const msg = `🚨 Connection options of box ${box._id} not parseable: ${err}`;
-    sendWebsocketMessage(box._id, msg);
     throw new Error(msg);
   }
 
@@ -102,9 +101,9 @@ module.exports = function parseConfig (box) {
       const msg = {
         'mqtt-client': `⚠️ mqtt decode options of box ${box._id} not parseable: ${err}`,
       };
-      sendWebsocketMessage(box._id, msg);
-      log.warn(msg);
       decodeOptions = undefined;
+      log.warn(msg);
+      throw new Error(msg);
     }
   }
 

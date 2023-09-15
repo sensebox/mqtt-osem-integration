@@ -6,7 +6,6 @@ const { ForbiddenError } = require('restify-errors');
 const { User } = require('@sensebox/opensensemap-api-models');
 
 const config = require('config');
-const logger = require('../logger');
 const {
   algorithm: jwt_algorithm,
   issuer: jwt_issuer,
@@ -34,12 +33,8 @@ const verifyJwt = function verifyJwt (socket, next) {
   // Verify JWT token
   jwt.verify(jwtString, jwt_secret, jwtVerifyOptions, function (err, decodedJwt) {
     if (err) {
-      logger.error(err);
-
       return next(new ForbiddenError(jwtInvalidErrorMessage));
     }
-
-    logger.info(decodedJwt);
 
     User.findOne({
       email: decodedJwt.sub.toLowerCase(),

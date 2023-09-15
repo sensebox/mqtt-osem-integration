@@ -68,10 +68,11 @@ const connect = async function connect (box) {
   try {
     mqttCfg = parseMQTTConfig(box);
   } catch (err) {
+    sendWebsocketMessage(box._id, err);
     log.error(err);
   }
 
-  if (!mqttCfg.enabled) {
+  if (mqttCfg && !mqttCfg.enabled) {
     return;
   }
   const msg = { 'mqtt-client': `ℹ️ connecting mqtt for box ${box._id}` };
