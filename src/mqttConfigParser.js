@@ -131,6 +131,12 @@ module.exports = function parseConfig (box) {
           message.toString(),
           decodeOptions
         );
+        const msg = {
+          'mqtt-client': `✅ received, decoded the following mqtt message for box ${box._id}: ${JSON.stringify(decodedMeasurement)}`,
+        };
+        log.info(msg);
+        sendWebsocketMessage(box._id, msg);
+
         // Populate lastMeasurement on box
         const BOX_SUB_PROPS_FOR_POPULATION = [
           {
