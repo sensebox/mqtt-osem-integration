@@ -27,7 +27,7 @@
     "@sensebox/opensensemap-api-models": "3.1.0",
     "@sensebox/osem-protos": "^1.1.0",
     "mqtt": "^5.0.5",
-    "pino": "^8.15.1"
+    "pino": "^8.15.6"
   },
   "publishConfig": {
     "access": "public"
