@@ -1,20 +1,20 @@
 # --------------> The build image
-FROM node:18.17.1-bullseye-slim as build
+FROM node:20.6.0-bullseye-slim as build
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends git dumb-init
 
 WORKDIR /usr/src/app
 
-# copy in main package.json and yarn.lock
+# copy in main package.json and package-lock.lock
 COPY package.json /usr/src/app/
-COPY yarn.lock /usr/src/app/
+COPY package-lock.json /usr/src/app/
 
-RUN yarn install --pure-lockfile --production
+RUN npm ci --only=production
 
 COPY . /usr/src/app
 
 # --------------> The production image
-FROM node:18.17.1-bullseye-slim
+FROM node:20.6.0-bullseye-slim
 
 ENV NODE_ENV=production
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init

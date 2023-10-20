@@ -30,6 +30,7 @@ See [config/default.json](config/default.json). You should at least configure th
 
 To get up and running for development run the following steps:
 
+- Run `npm install`
 - Run `./scripts/setup_certs.sh` for generating development certificates.
 - Set the MQTT URL in row 23 in `./seeds/devices.json`
 - Run `docker-compose up -d`
@@ -51,7 +52,7 @@ Its possible to supply your configuration json through the `NODE_CONFIG` environ
 
 Container images for this service are created on each push on [Github Container Registry].
 
-Stable versions should be tagged using `yarn version` and `git push --follow-tags origin master`
+Stable versions should be tagged using `npm version` and `git push --follow-tags origin master`
 
 [openSenseMap API]: https://github.com/sensebox/openSenseMap-API
 [node-config]: https://github.com/lorenwest/node-config

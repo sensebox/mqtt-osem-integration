@@ -1,62 +1,70 @@
 [
   {
-    "_id": "64ff1076088f2df36ed4d8ab",
-    "createdAt" : "2023-06-23T10:50:48.246Z",
-    "updatedAt" : "2023-09-11T11:35:12.838Z",
-    "name" : "MQTT Test Device",
-    "currentLocation" : {
-      "timestamp" : "2023-06-23T10:50:48.241Z",
-      "coordinates" : [
-        7.2123,
-        51.4823
-      ],
-      "type" : "Point"
+    "_id": {
+      "$oid": "64ff1076088f2df36ed4d8ab"
     },
-    "exposure" : "outdoor",
-    "integrations" : {
-      "mqtt" : {
-        "enabled" : true,
-        "messageFormat" : "json",
-        "connectionOptions" : "",
-        "decodeOptions" : "",
-        "topic" : "test",
-        "url" : ""
+    "createdAt": {
+      "$date": "2023-07-03T12:55:01.096Z"
+    },
+    "updatedAt": {
+      "$date": "2023-07-03T12:55:01.096Z"
+    },
+    "name": "MQTT Test Device",
+    "currentLocation": {
+      "timestamp": {
+        "$date": "2023-07-03T12:55:01.084Z"
       },
-      "ttn" : {
-        "decodeOptions" : [ ],
-        "profile" : "sensebox/home",
-        "dev_id" : "43369",
-        "app_id" : "15649"
+      "coordinates": [7, 52],
+      "type": "Point"
+    },
+    "exposure": "outdoor",
+    "integrations": {
+      "mqtt": {
+        "enabled": true,
+        "messageFormat": "json",
+        "connectionOptions": "",
+        "decodeOptions": "",
+        "topic": "test",
+        "url": "mqtts://example:Example12345@bdfa399e2740478184c01eab99e1acc6.s1.eu.hivemq.cloud:8883"
+      },
+      "ttn": {
+        "decodeOptions": [],
+        "profile": "sensebox/home",
+        "dev_id": "43369",
+        "app_id": "15649"
       }
     },
-    "access_token" : "c343eb5329cf80b1fc26b4943e52ab42d4ef699e17a0499ff2e1a69f3d7ab624",
-    "useAuth" : true,
-    "sensors" : [
+    "access_token": "c3cceea255686c92037698c79b3558e4c243bf8be7eb2e7b643d418073155719",
+    "useAuth": false,
+    "sensors": [
       {
-        "_id": "64ff1076088f2df36ed4d8ac",
         "title": "Temperatur",
         "unit": "°C",
         "sensorType": "HDC1080",
-        "icon": "osem-thermometer"
+        "icon": "osem-thermometer",
+        "_id": {
+          "$oid": "64ff1076088f2df36ed4d8ac"
+        }
       },
       {
-        "_id": "64ff1076088f2df36ed4d8ad",
         "title": "rel. Luftfeuchte",
         "unit": "%",
         "sensorType": "HDC1080",
-        "icon": "osem-humidity"
+        "icon": "osem-humidity",
+        "_id": {
+          "$oid": "64ff1076088f2df36ed4d8ad"
+        }
       }
     ],
-    "model" : "homeV2Wifi",
-    "grouptag" : [],
-    "locations" : [
+    "model": "homeV2Wifi",
+    "grouptag": [],
+    "locations": [
       {
-        "timestamp" : "2023-06-23T10:50:48.241Z",
-        "coordinates" : [
-          7.2123,
-          51.4823
-        ],
-        "type" : "Point"
+        "timestamp": {
+          "$date": "2023-07-03T12:55:01.084Z"
+        },
+        "coordinates": [7, 52],
+        "type": "Point"
       }
     ]
   }

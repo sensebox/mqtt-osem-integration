@@ -11,6 +11,9 @@
       "server_key": "OSEM_MQTT_GRPC_SERVER_KEY"
     }
   },
+  "websocket": {
+    "port": "OSEM_MQTT_WEBSOCKET_PORT"
+  },
   "mqtts_test_client": {
     "url": "MQTTS_TEST_URL"
   },

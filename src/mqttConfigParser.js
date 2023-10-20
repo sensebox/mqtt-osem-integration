@@ -2,6 +2,7 @@
 
 const log = require('./logger'),
   { decoding, Box } = require('@sensebox/opensensemap-api-models');
+const { sendWebsocketMessage } = require('./websocket-server');
 
 // see https://github.com/mqttjs/MQTT.js#client
 const USER_CONNECT_OPTIONS_ALLOWED_KEYS = [
@@ -88,9 +89,8 @@ module.exports = function parseConfig (box) {
   try {
     connectionOptions = parseUserConnectionOptions(connectionOptions);
   } catch (err) {
-    throw new Error(
-      `Connection options of box ${box._id} not parseable: ${err}`
-    );
+    const msg = `🚨 Connection options of box ${box._id} not parseable: ${err}`;
+    throw new Error(msg);
   }
 
   // validate decodeOptions
@@ -98,10 +98,12 @@ module.exports = function parseConfig (box) {
     try {
       decodeOptions = JSON.parse(decodeOptions);
     } catch (err) {
-      log.warn({
-        'mqtt-client': `mqtt decode options of box ${box._id} not parseable: ${err}`
-      });
+      const msg = {
+        'mqtt-client': `⚠️ mqtt decode options of box ${box._id} not parseable: ${err}`,
+      };
       decodeOptions = undefined;
+      log.warn(msg);
+      sendWebsocketMessage(box._id, msg);
     }
   }
 
@@ -129,20 +131,35 @@ module.exports = function parseConfig (box) {
           message.toString(),
           decodeOptions
         );
+        const msg = {
+          'mqtt-client': `✅ received, decoded the following mqtt message for box ${box._id}: ${JSON.stringify(decodedMeasurement)}`,
+        };
+        log.info(msg);
+        sendWebsocketMessage(box._id, msg);
+
         // Populate lastMeasurement on box
         const BOX_SUB_PROPS_FOR_POPULATION = [
           {
             path: 'sensors.lastMeasurement', select: { value: 1, createdAt: 1, _id: 0 }
           },
         ];
+
         const theBox = await Box.findById(box._id).populate(BOX_SUB_PROPS_FOR_POPULATION);
 
-        const { ok, n } = theBox.saveMeasurementsArray(decodedMeasurement);
+        const { ok, n } = await theBox.saveMeasurementsArray(decodedMeasurement);
         if (ok === n) {
-          log.info({ 'mqtt-client': `received, decoded and saved mqtt message for box ${box._id}` });
+          const msg = {
+            'mqtt-client': `✅ received, decoded and saved mqtt message for box ${box._id}`,
+          };
+          sendWebsocketMessage(box._id, msg);
+          log.info(msg);
         }
       } catch (err) {
-        log.error({ 'mqtt-client': `error saving mqtt message for box ${box._id}: ${err}` });
+        const msg = {
+          'mqtt-client': `🚨 error saving mqtt message for box ${box._id}: ${err}`,
+        };
+        sendWebsocketMessage(box._id, msg);
+        log.error(msg);
       }
     }
   };
