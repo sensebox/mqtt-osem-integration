@@ -29,7 +29,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mqtt": "^5.0.5",
-    "pino": "^8.15.1",
+    "pino": "^8.17.1",
     "restify-errors": "^8.0.2",
     "socket.io": "^4.7.2"
   },
