@@ -1,5 +1,5 @@
 # --------------> The build image
-FROM node:20.6.0-bullseye-slim as build
+FROM node:21.5.0-bullseye-slim as build
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends git dumb-init
 
@@ -14,7 +14,7 @@ RUN npm ci --only=production
 COPY . /usr/src/app
 
 # --------------> The production image
-FROM node:20.6.0-bullseye-slim
+FROM node:21.5.0-bullseye-slim
 
 ENV NODE_ENV=production
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
