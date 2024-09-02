@@ -10,9 +10,9 @@
     "start": "node src/index.js",
     "lint": "eslint --ignore-pattern node_modules --fix \"{src,test,.scripts}/**/*.js\"",
     "lint:ci": "eslint --ignore-pattern node_modules \"{test,packages}/**/*.js\"",
-    "pretest": "docker-compose -f test/docker-compose.yml up -d",
+    "pretest": "docker compose -f test/docker-compose.yml up -d",
     "test": "mocha --exit test/index.js",
-    "posttest": "docker-compose -f test/docker-compose.yml down -v",
+    "posttest": "docker compose -f test/docker-compose.yml down -v",
     "only-test": "mocha --inspect-brk test/index.js"
   },
   "devDependencies": {
