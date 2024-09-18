@@ -51,38 +51,38 @@ describe('ws client', function () {
   });
 });
 
-// describe('wss client', function () {
-//   let testBox;
-//   before(async function () {
-//     await connect(dbConnectionString({ db: 'mqttTest' }));
+describe('wss client', function () {
+  let testBox;
+  before(async function () {
+    await connect(dbConnectionString({ db: 'mqttTest' }));
 
-//     testBox = await Box.initNew(wssBox());
-//     mqttClient.connect(testBox);
-//     const mqclient = mqtt.connect(testBox.integrations.mqtt.url);
+    testBox = await Box.initNew(wssBox());
+    mqttClient.connect(testBox);
+    const mqclient = mqtt.connect(testBox.integrations.mqtt.url);
 
-//     return new Promise((resolve) => {
-//       mqclient.on('connect', () => {
-//         setTimeout(() => {
-//           mqclient.subscribe(testBox.integrations.mqtt.topic);
-//           mqclient.publish(
-//             testBox.integrations.mqtt.topic,
-//             testBox.sensors.map((s) => `${s._id},12`).join('\n')
-//           );
-//           setTimeout(() => {
-//             resolve();
-//           }, 1000);
-//         }, 100);
-//       });
-//     });
-//   });
+    return new Promise((resolve) => {
+      mqclient.on('connect', () => {
+        setTimeout(() => {
+          mqclient.subscribe(testBox.integrations.mqtt.topic);
+          mqclient.publish(
+            testBox.integrations.mqtt.topic,
+            testBox.sensors.map((s) => `${s._id},12`).join('\n')
+          );
+          setTimeout(() => {
+            resolve();
+          }, 1000);
+        }, 100);
+      });
+    });
+  });
 
-//   it('should accept measurements via wss message', async function () {
-//     const box = await Box.findBoxById(testBox._id, {
-//       onlyLastMeasurements: true,
-//     });
+  it('should accept measurements via wss message', async function () {
+    const box = await Box.findBoxById(testBox._id, {
+      onlyLastMeasurements: true,
+    });
 
-//     for (const sensor of box.sensors) {
-//       expect(sensor.lastMeasurement.value).equal('12');
-//     }
-//   });
-// });
+    for (const sensor of box.sensors) {
+      expect(sensor.lastMeasurement.value).equal('12');
+    }
+  });
+});
