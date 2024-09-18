@@ -8,7 +8,7 @@ module.exports = function mqttsBox (
     // defaults
     enabled: true,
     url: config.get('url'),
-    topic: 'generalTestTopic',
+    topic: 'integration',
     messageFormat: 'csv',
   }
 ) {
