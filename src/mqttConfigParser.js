@@ -46,6 +46,10 @@ const parseUserConnectionOptions = function parseUserConnectionOptions (
     opts.connectTimeout = 5 * 1000;
   }
 
+  if (!opts.reconnectPeriod || isNaN(Number(opts.reconnectPeriod))) {
+    opts.reconnectPeriod = 0;
+  }
+
   return opts;
 };
 

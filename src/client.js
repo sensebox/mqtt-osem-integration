@@ -26,7 +26,7 @@ const getClient = function getClient (
   let errRetries = maxRetries, closeRetries = maxRetries;
 
   const client = mqtt.connect(url, connectionOptions);
-  client.reconnecting = true;
+  // client.reconnecting = true;
 
   return new Promise(function (resolve, reject) {
     client.on('error', function (err) {
