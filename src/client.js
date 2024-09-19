@@ -5,48 +5,31 @@ const { sendWebsocketMessage } = require('./websocket-server');
 const mqtt = require('mqtt'),
   parseMQTTConfig = require('./mqttConfigParser'),
   log = require('./logger'),
+  { addJob } = require('./queue'),
   config = require('config').get('mqtt_client');
 
-const RETRY_AFTER_MINUTES = Number(config.get('retry_after_minutes')),
-  NUMBER_RETRIES = Number(config.get('num_retries'));
+const RETRY_AFTER_MINUTES = Number(config.get('retry_after_minutes'));
 
 // use this object as simple key/value store for connecting/disconnecting
 const mqttConnections = {};
 
-const _retryAfter = function _retryAfter (box, afterMinutes) {
-  setTimeout(() => {
-    connect(box);
-  }, afterMinutes * 60000);
-};
-
 const getClient = function getClient (
   { url, connectionOptions, topic },
-  maxRetries
 ) {
-  let errRetries = maxRetries, closeRetries = maxRetries;
 
   const client = mqtt.connect(url, connectionOptions);
-  client.reconnecting = true;
 
   return new Promise(function (resolve, reject) {
     client.on('error', function (err) {
-      errRetries = errRetries - 1;
-      if (errRetries === 0) {
-        client.reconnecting = false;
-        client.end(true);
+      client.end(true);
 
-        return reject(err);
-      }
+      return reject(err);
     });
 
     client.on('close', function () {
-      closeRetries = closeRetries - 1;
-      if (closeRetries === 0) {
-        client.reconnecting = false;
-        client.end(true);
+      client.end(true);
 
-        return reject(new Error('connection closed after 5 retries.'));
-      }
+      return reject(new Error('Connection closed.'));
     });
 
     client.on('connect', function () {
@@ -81,8 +64,7 @@ const connect = async function connect (box) {
 
   try {
     const client = await getClient(
-      mqttCfg.internalConnectionOptions,
-      NUMBER_RETRIES
+      mqttCfg.internalConnectionOptions
     );
     const msg = { 'mqtt-client': `ℹ️ connected mqtt for box ${box._id}` };
     sendWebsocketMessage(box._id, msg);
@@ -90,10 +72,24 @@ const connect = async function connect (box) {
 
     mqttConnections[box._id] = client;
 
+    client.on('error', function (err) {
+      const msg = {
+        'mqtt-client': `🚨 mqtt error for box ${box._id}. Retry after ${RETRY_AFTER_MINUTES} minutes.`,
+      };
+      log.error(err, msg);
+      sendWebsocketMessage(box._id, msg);
+
+      // Add box to retry queue
+      addJob('retry_connect', { box });
+    });
+
     client.on('close', function () {
       const msg = { 'mqtt-client': `ℹ️ mqtt closed for box: ${box._id}` };
       sendWebsocketMessage(box._id, msg);
       log.info(msg);
+
+      // Add box to retry queue
+      addJob('retry_connect', { box });
     });
 
     client.on('message', mqttCfg.decodeAndSaveMessage);
@@ -103,8 +99,18 @@ const connect = async function connect (box) {
     };
     log.error(err, msg);
     sendWebsocketMessage(box._id, msg);
-    // retry after..
-    _retryAfter(box, RETRY_AFTER_MINUTES);
+
+    // Add box to retry queue
+    const status = await addJob('retry_connect', { box });
+    switch (status) {
+    case 'MAX_ATTEMPTS':
+      disconnect(box);
+      break;
+
+    default:
+      // Nothing to do here
+      break;
+    }
   }
 };
 
@@ -112,7 +118,8 @@ const disconnect = function disconnect ({ _id }) {
   if (mqttConnections[_id]) {
     mqttConnections[_id].end(true);
     mqttConnections[_id] = undefined;
-    const msg = { 'mqtt-client': `ℹ️ mqtt disconnected mqtt for box ${_id}` };
+
+    const msg = { 'mqtt-client': `ℹ️ mqtt disconnected for box ${_id}` };
     log.info(msg);
     sendWebsocketMessage(_id, msg);
   }

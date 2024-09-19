@@ -7,6 +7,7 @@ const {
   log = require('./logger.js'),
   MQTTClient = require('./client'),
   grpcServer = require('./grpc-server'),
+  worker = require('./worker.js'),
   websocketServer = require('./websocket-server.js');
 
 const findMQTTBoxes = function findMQTTBoxes () {
@@ -35,6 +36,7 @@ const onDbConnected = async function onDbConnected () {
   try {
     grpcServer.init();
     websocketServer.init();
+    worker.init();
   } catch (err) {
     log.fatal(err);
     mongoose.disconnect().then(function () {
