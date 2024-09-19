@@ -23,6 +23,15 @@ services:
           }
         }
 
+  redis-stack:
+    image: redis/redis-stack:latest
+    volumes:
+      - ./local-redis-stack.conf:/redis-stack.conf
+      - ./local-data:/data
+    ports:
+      - 6379:6379
+      - 8001:8001
+
   db:
     image: mongo:5
     container_name: osem-dev-mongo

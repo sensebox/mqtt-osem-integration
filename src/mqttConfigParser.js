@@ -46,6 +46,8 @@ const parseUserConnectionOptions = function parseUserConnectionOptions (
     opts.connectTimeout = 5 * 1000;
   }
 
+  // Disable reconnecting in MQTT.js
+  // https://github.com/mqttjs/MQTT.js?tab=readme-ov-file#enabling-reconnection-with-reconnectperiod-option
   if (!opts.reconnectPeriod || isNaN(Number(opts.reconnectPeriod))) {
     opts.reconnectPeriod = 0;
   }

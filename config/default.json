@@ -6,7 +6,7 @@
   },
   "mqtt_client": {
     "num_retries": 5,
-    "retry_after_minutes": 10
+    "retry_after_minutes": 1
   },
   "grpc": {
     "port": 3925,
@@ -18,6 +18,14 @@
   },
   "websocket": {
     "port": 5173
+  },
+  "redis": {
+    "host": "localhost",
+    "port": 6379,
+    "username": "worker",
+    "password": "somepassword",
+    "db": 0,
+    "queue": "mqtt"
   },
   "jwt": {
     "secret": "OH GOD THIS IS SO INSECURE PLS CHANGE ME",
